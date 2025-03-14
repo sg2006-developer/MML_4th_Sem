@@ -1,0 +1,15 @@
+from google.colab.patches import cv2_imshow
+import cv2
+import numpy as np
+img = cv2.imread('Img2.jpg',0)
+cv2_imshow(img)
+A = img
+print("\n Grayscale image matrix: \n",A)
+U,S,VT = np.linalg.svd(A)
+k = int(input("Enter the value for compression: "))
+U = U[:,:k]
+S = np.diag(S[:k])
+VT = VT[:k,:]
+new_A = np.dot(U,np.dot(S,VT))
+print("\n Compressed with matrix: \n",new_A)
+cv2_imshow(new_A)
